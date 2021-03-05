@@ -1,0 +1,13 @@
+.App{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  border: 1px solid black;
+  height: 100vh;
+
+
+}
+.App > div{
+  border: 1px solid black;
+}
+

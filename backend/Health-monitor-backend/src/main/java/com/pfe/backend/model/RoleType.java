@@ -1,0 +1,6 @@
+package com.pfe.backend.model;
+
+public enum RoleType {
+	ROLE_USER,
+    ROLE_ADMIN
+}
