@@ -8,7 +8,7 @@ Location: Ecole Supérieure de Technologie d'Agadir - Ibn Zohr University
 <img align="center" src='/logo.png' alt="logo" width="400"/>
 </p>
 
-[![Issues](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://github.com/benyob/health-monitoring-spring-boot-reactjs/issues)
+[![Issues](https://img.shields.io/github/downloads/atom/atom/total.svg?style=flat)](https://github.com/benyob/health-monitoring-spring-boot-reactjs/issues)  
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
