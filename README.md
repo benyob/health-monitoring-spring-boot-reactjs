@@ -106,7 +106,5 @@ Install node.js :
 8. run spring boot server<br>
    ```sh 
    Ctrl+F11
- ```
-
-
+    ```
 
