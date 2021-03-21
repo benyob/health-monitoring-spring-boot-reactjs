@@ -99,5 +99,14 @@ Install node.js :
    npm install react-spring
    ```
 
+7. run node server<br>
+   ```sh 
+   npm start
+    ```
+8. run spring boot server<br>
+   ```sh 
+   Ctrl+F11
+ ```
+
 
 
