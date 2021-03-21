@@ -72,9 +72,9 @@ Install node.js :
    ```sh
    git clone https://github.com/benyob/health-monitoring-spring-boot-reactjs.git
    ```
-2. cd to health-monitor folder
+2. cd to health_monitor folder
    ```sh
-   cd health-monitor
+   cd health_monitor
    ```
 3. install axios<br>
    with npm : 
