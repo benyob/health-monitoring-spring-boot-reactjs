@@ -8,14 +8,7 @@ Location: Ecole Supérieure de Technologie d'Agadir - Ibn Zohr University
 <img align="center" src='/logo.png' alt="logo" width="400"/>
 </p>
 
-## Downloads
-#### GitHub (All Releases)
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg?style=flat)]()  
-
-## Issues
-[![Issues](https://img.shields.io/github/issues-raw/tterb/PlayMusic.svg?maxAge=25000)](https://github.com/tterb/Hyde/issues)  
-
-
+[![Issues](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://github.com/benyob/health-monitoring-spring-boot-reactjs/issues)
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
