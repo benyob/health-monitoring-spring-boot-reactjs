@@ -52,7 +52,8 @@ public class User {
 
 	// *********** Health Data ****************//
 	// Blood pressure
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private List<BloodPressure> dataBloodPressure = new ArrayList<>();
 

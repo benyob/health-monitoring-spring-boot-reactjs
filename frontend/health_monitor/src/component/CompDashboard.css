@@ -1,0 +1,5 @@
+.dashboard-content{
+    grid-area: dashboard-content;
+    background-color: var(--col_unclear_white);
+    overflow:hidden;
+}

@@ -1,122 +1,35 @@
-import React, { Component } from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import CompAuth from './component/CompAuth';
+import CompDashboard from './component/CompDashboard';
+import ThemeService from './service/theme.service'
 
-import AuthService from "./service/auth.service";
+export const MyThemeContext = React.createContext();
+function App() {
+  const [theme, setTheme] = useState(ThemeService.getTheme())
 
-import Login from "./components/CompLogin";
-import Register from "./components/CompRegister";
-import Home from "./components/CompHome";
-import Profile from "./components/CompProfile";
-import BoardUser from "./components/DashboradUser";
-import BoardAdmin from "./components/DashboradAdmin";
-
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.logOut = this.logOut.bind(this);
-
-    this.state = {
-      showAdminBoard: false,
-      currentUser: undefined,
-    };
+  const updateTheme = () => {
+    setTheme(ThemeService.getTheme())
   }
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <Switch>
 
-  componentDidMount() {
-    const user = AuthService.getCurrentUser();
+            <MyThemeContext.Provider value={{ theme, updateTheme }}>
+              <Route exact path={["/", "/auth"]}
+                render={(props) => (<CompAuth {...props} theme={theme} updateTheme={updateTheme} />)} />
+              <Route path={"/dashboard"}
+                render={(props) => (<CompDashboard {...props} theme={theme} updateTheme={updateTheme} />)} />
+            </MyThemeContext.Provider>
 
-    if (user) {
-      this.setState({
-        currentUser: user,
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
-      });
-    }
-  }
+        </Switch>
 
-  logOut() {
-    AuthService.logout();
-  }
-
-  render() {
-    const { currentUser, showAdminBoard } = this.state;
-
-    return (
-      <BrowserRouter>
-        <div>
-          <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <Link to={"/"} className="navbar-brand">
-              health monitor
-          </Link>
-            <div className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link to={"/home"} className="nav-link">
-                  Home
-              </Link>
-              </li>
-              {showAdminBoard && (
-                <li className="nav-item">
-                  <Link to={"/admin"} className="nav-link">
-                    Admin Board
-                </Link>
-                </li>
-              )}
-
-              {currentUser && (
-                <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    User
-                </Link>
-                </li>
-              )}
-            </div>
-
-            {currentUser ? (
-              <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
-                    {currentUser.username}
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={this.logOut}>
-                    LogOut
-                </a>
-                </li>
-              </div>
-            ) : (
-                <div className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    <Link to={"/login"} className="nav-link">
-                      Login
-                </Link>
-                  </li>
-
-                  <li className="nav-item">
-                    <Link to={"/register"} className="nav-link">
-                      Register
-                </Link>
-                  </li>
-                </div>
-              )}
-          </nav>
-
-          <div className="container mt-3">
-            <Switch>
-              <Route exact path={["/", "/home"]} component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/profile" component={Profile} />
-              
-              <Route path="/user" component={BoardUser} />
-              <Route path="/admin" component={BoardAdmin} />
-            </Switch>
-          </div>
-        </div>
-      </BrowserRouter>
-    );
-  }
+      </div>
+    </BrowserRouter>
+  );
 }
+
 
 export default App;

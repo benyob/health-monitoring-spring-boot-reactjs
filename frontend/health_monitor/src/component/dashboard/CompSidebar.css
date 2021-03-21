@@ -1,0 +1,48 @@
+.dashboard-sidebar{
+    grid-area: dashboard-sidebar;
+    background-color: white;
+    min-width: 13rem;
+    border-radius: var(--main_radius) 0 0 0;
+}
+.dashboard-sidebar>.h3-big-title{
+    margin-left: 2.5rem;
+}
+.sidebar-btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 80%;
+    height: 80%;
+    margin:0 auto;
+    
+    /* border: 1px solid red; */
+}
+.sidebar-btn{
+    /* border: 1px solid black; */
+    border-radius: .5rem;
+    height: 3.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration-line: none;
+}
+.sidebar-btn-icon{
+    width: 2rem;
+    height: 2rem;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: .5rem;
+}
+
+.sidebar-btn-icon>img{
+    width: 1.2rem;
+    height: 1.2rem;
+}
+.sidebar-btn:hover{
+    background-color: var(--col_veryLight_blue) !important;
+}
