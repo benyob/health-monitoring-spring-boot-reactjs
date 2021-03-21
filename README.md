@@ -68,15 +68,15 @@ Install node.js :
 <a href = "https://nodejs.org/en/download/">Node.js</a>
 ### Installation
 
-1. Clone the repo
+1. **Clone the repo**
    ```sh
    git clone https://github.com/benyob/health-monitoring-spring-boot-reactjs.git
    ```
-2. cd to health_monitor folder
+2. **cd to health_monitor folder**
    ```sh
    cd health_monitor
    ```
-3. install axios<br>
+3. **install axios**<br>
    with npm : 
    ```sh 
    npm install axios
@@ -85,25 +85,25 @@ Install node.js :
    ```sh 
    yarn add axios
    ```
-4. install React Router<br>
+4. **install React Router**<br>
    ```sh 
    npm install react-router-dom
 
    ```
-5. install Styled Components<br>
+5. **install Styled Components**<br>
    ```sh 
    npm install --save styled-components
    ```
-6. install React Spring<br>
+6. **install React Spring**<br>
    ```sh 
    npm install react-spring
    ```
 
-7. run node server<br>
+7. **run node server**<br>
    ```sh 
    npm start
     ```
-8. run spring boot server<br>
+8. **run spring boot server**<br>
    ```sh 
    Ctrl+F11
     ```
