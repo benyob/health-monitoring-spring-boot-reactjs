@@ -166,10 +166,10 @@ export default class CompAuth extends React.Component {
         const theme = this.props.theme;
 
         const style_drawerTheme = {
-            left: `${this.state.isThemeDrawer ? ('auto') : ('15rem')}`,
+            opacity: `${this.state.isThemeDrawer ? ('1') : ('0')}`,
         }
         const style_drawerLanguage = {
-            left: `${this.state.isLanguageDrawer ? ('auto') : ('15rem')}`,
+            opacity: `${this.state.isLanguageDrawer ? ('1') : ('0')}`,
         }
         
         return (
@@ -191,7 +191,7 @@ export default class CompAuth extends React.Component {
                                         <img src={ic_username} className="icon-auth" alt="" />
                                         <input style={theme.authInput} type="text" className="input-auth" placeholder={getText("username") + " ..."}
                                             value={this.state.username}
-                                            onChange={this.onChangeUsername} autocomplete="nope"/>
+                                            onChange={this.onChangeUsername} autoComplete="nope"/>
                                     </div>
 
                                     <div className="input-auth-container">
@@ -206,7 +206,7 @@ export default class CompAuth extends React.Component {
                                             <img src={ic_email} className="icon-auth" alt="" />
                                             <input style={theme.authInput} type="text" className="input-auth" placeholder={getText("email") + " ..."}
                                                 value={this.state.email}
-                                                onChange={this.onChangeEmail} autocomplete="nope"/>
+                                                onChange={this.onChangeEmail} autoComplete="nope"/>
                                         </div>
                                     ) : (
                                         <></>

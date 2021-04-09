@@ -21,16 +21,22 @@ class LanguageService {
         "Blood Pressure": { fr: "Pression Artérielle", ar: "ضغط الدم" },
         "Systolic": { fr: "Systolique", ar: "الانقباضي" },
         "Diastolic": { fr: "Diastolique", ar: "الانبساطي" },
-        "Add Records": { fr: "Ajouter des données", ar: "أضف البيانات" },
-        "": { fr: "", ar: "" },
-        "": { fr: "", ar: "" },
-        "": { fr: "", ar: "" },
-        "": { fr: "", ar: "" },
-        "": { fr: "", ar: "" },
-        "": { fr: "", ar: "" },
-        "": { fr: "", ar: "" },
-        "": { fr: "", ar: "" },
-        "": { fr: "", ar: "" },
+        "Records": { fr: "Données", ar: "البيانات" },
+        "Note": { fr: "Note", ar: "ملحوظة" },
+        "Average Value": { fr: "Valeur moyenne", ar: "القيمة المتوسطة" },
+        "Measurement Date": { fr: "Date de mesure", ar: "تاريخ القياس" },
+        "Add": { fr: "Ajouter", ar: "أضف" },
+        "Extra": { fr: "Extra", ar: "إضافي" },
+        "Additional Tools": { fr: "Outils supplémentaires", ar: "أدوات إضافية" },
+        "There are no records ,add new ones": { fr: "Il n'y a pas d'enregistrements, ajoutez-en de nouveaux !", ar: "! لا توجد سجلات ، أضف سجلات جديدة" },
+        "Sugar Levels": { fr: "Niveaux de sucre", ar: "مستويات السكر" },
+        "Value": { fr: "Valeur", ar: "القيمة" },
+        "Reference Value": { fr: "La Valeur de Référence", ar: "القيمة المرجعية" },
+        // "": { fr: "", ar: "" },
+        // "": { fr: "", ar: "" },
+        // "": { fr: "", ar: "" },
+        // "": { fr: "", ar: "" },
+        // "": { fr: "", ar: "" },
 
     }
     getLanguage(){
@@ -56,11 +62,11 @@ class LanguageService {
 
         switch (lang) {
             case "eng":
-                return (t in this.dictionary) ? t : ("*" + t)
+                return (t in this.dictionary) ? t : ("[" + t+"]")
             case "fr":
-                return (t in this.dictionary)? this.dictionary[t].fr : ("*" + t)
+                return (t in this.dictionary)? this.dictionary[t].fr : ("[" + t+"]")
             case "ar":
-                return (t in this.dictionary) ? this.dictionary[t].ar : ("*" + t)
+                return (t in this.dictionary) ? this.dictionary[t].ar : ("["+ t+"]")
 
         }
 

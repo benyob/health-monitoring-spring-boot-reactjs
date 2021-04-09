@@ -1,5 +1,7 @@
 package com.pfe.backend.model.healthdata;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -29,8 +31,8 @@ public class BloodPressure extends HealthData{
 //		this.user = user;
 //	}
 	public BloodPressure() {}
-	public BloodPressure(float value ,float value2, String note) {
-		super(value, note);
+	public BloodPressure(float value ,float value2, String note ,Date date) {
+		super(value, note ,date);
 		// TODO Auto-generated constructor stub
 		this.value2 = value2;
 	}

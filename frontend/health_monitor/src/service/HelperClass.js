@@ -1,6 +1,17 @@
 export const HealthDataType={
     BloodPressure:"BloodPressure",
     SugarLevels:"SugarLevels",
+    PulseRate:"PulseRate",
+    RespirationRate:"RespirationRate",
+    CholesterolLevels:"CholesterolLevels",
+    Temperature:"Temperature",
+    SleepingHours:"SleepingHours",
+    Weight:"Weight",
+    Calories :"Calories",
+    Sodium  :"Sodium",
+    Carbohydrate :"Carbohydrate",
+    Protein :"Protein",
+
     none:"none",
 
 }

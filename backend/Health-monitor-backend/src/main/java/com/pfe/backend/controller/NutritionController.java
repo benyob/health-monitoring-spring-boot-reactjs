@@ -1,5 +1,10 @@
 package com.pfe.backend.controller;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pfe.backend.model.FullMeal;
 import com.pfe.backend.model.HealthDataType;
 import com.pfe.backend.model.Meal;
 import com.pfe.backend.model.User;
@@ -31,23 +37,54 @@ public class NutritionController {
 	
 	@PostMapping("/meal/add")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public boolean setMeal(@RequestBody Meal meal)
+	public void setMeal(@RequestBody List<Meal> meals)
 	{
-		//add it if it doesnt exist
-		if (!mealRepository.existsByName(meal.getName())) {
-			mealRepository.save(meal);
-			return true;
+		for (Meal m : meals) {
+			
+		if(!mealRepository.existsByDescription(m.getDescription()))
+			{
+				mealRepository.save(m);
+			}
 		}
-		return false;
-	
 	}
 	
-	//move this to view
-	@GetMapping("/meal/{name}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public Meal getMeal(@PathVariable String name)
-	{
-		return mealRepository.findByName(name).orElse(new Meal());
+	public List <FullMeal> generateFullMeal(){
+		
+		List<Float> arr = new ArrayList<Float>();
+		arr.add(1f);
+		arr.add(2f);
+		arr.add(3f);
+		arr.add(4f);
+		arr.add(5f);
+		arr.add(6f);
+		arr.add(7f);
+		arr.add(8f);
+		arr.add(9f);
+		int T = 13;
+		Hashtable<Float, Float> hash = new Hashtable<>();
+		for (int i = 0; i < arr.size(); i++) {
+			hash.put(arr.get(i), (float)i);
+		}
+		for (int i = 0; i < arr.size(); i++) {
+			hash.put(arr.get(i), (float)i);
+			if (hash.get(T - arr.get(i))  != i ) {
+				System.out.println("pair"+ i +" "+ hash.get(T - arr.get(i))+" has sum "+ T);
+			}
+		}
+		return null;
+		/*
+		 for (i=0 i<arr.length - 1 ;i++)
+{
+ hash(arr[i]) = i  // key is the element and value is its index.
+}
+
+for (i=0 i<arr.length - 1; i++)
+{
+ if (hash(T - arr[i]) != i ) // if T - ele exists and is different we found a pair
+   print "pair i , hash(T - arr[i]) has sum T"
+ 
+}
+*/
 	}
 }
 	

@@ -18,13 +18,6 @@ export default function CompChartBlood() {
     const openDetailedDataPage = useContext(DetailedDataPageContext)
 
 
-    useEffect(() => {
-        console.log("Chat Blood mounted");
-        healthDataService.getBloodPressure().then(res => {
-            updateHealthData(HealthDataType.BloodPressure ,res.data);
-            
-        })
-    }, [])
 
 
     const getText = (i) => {
@@ -72,13 +65,134 @@ export default function CompChartBlood() {
         }
         return d;
     }
+    const data_sugarLevels = () => {
+        const { data_sugarLevels } = healthData;
+
+        let dates = [];
+        let values1 = [];
+        //how many records to display in charts-> blood-> blood pressure chart
+        let displayedRecs = 7; 
+        for (let index = 0; index < data_sugarLevels.length; index++) {
+            //leave if we add 7 records or less
+            if(index>displayedRecs) break;
+            
+            dates.push(dateFormat(data_sugarLevels[index].date, "mmm d"));
+            values1.push(data_sugarLevels[index].value);
+            
+        }
+        const d = {
+            labels: dates,
+            datasets: [
+                {
+                    label: getText('Value')+" (mmol/L)",
+                    backgroundColor: 'rgba(29,100,100,.5)',
+                    borderColor:'rgba(50,100,100,1)',
+                    borderWidth: 1,
+                    data:values1,
+                    lineTension: .2,
+                }
+            ],
+        }
+        return d;
+    }
+    const data_CholesterolLevels = () => {
+        const { data_CholesterolLevels } = healthData;
+
+        let dates = [];
+        let values1 = [];
+        //how many records to display in charts-> blood-> blood pressure chart
+        let displayedRecs = 7; 
+        for (let index = 0; index < data_CholesterolLevels.length; index++) {
+            //leave if we add 7 records or less
+            if(index>displayedRecs) break;
+            
+            dates.push(dateFormat(data_CholesterolLevels[index].date, "mmm d"));
+            values1.push(data_CholesterolLevels[index].value);
+            
+        }
+        const d = {
+            labels: dates,
+            datasets: [
+                {
+                    label: getText('Value')+" (mmol/L)",
+                    backgroundColor: 'rgba(255,100,100,.5)',
+                    borderColor:'rgba(255,100,100,1)',
+                    borderWidth: 1,
+                    data:values1,
+                    lineTension: .2,
+                }
+            ],
+        }
+        return d;
+    }
+
+    const data_PulseRate = () => {
+        const { data_PulseRate } = healthData;
+
+        let dates = [];
+        let values1 = [];
+        //how many records to display in charts-> blood-> blood pressure chart
+        let displayedRecs = 7; 
+        for (let index = 0; index < data_PulseRate.length; index++) {
+            //leave if we add 7 records or less
+            if(index>displayedRecs) break;
+            
+            dates.push(dateFormat(data_PulseRate[index].date, "mmm d"));
+            values1.push(data_PulseRate[index].value);
+            
+        }
+        const d = {
+            labels: dates,
+            datasets: [
+                {
+                    label: getText('Value')+" (BPM)",
+                    backgroundColor: 'rgba(29,10,100,.5)',
+                    borderColor:'rgba(50,10,100,1)',
+                    borderWidth: 1,
+                    data:values1,
+                    lineTension: .2,
+                }
+            ],
+        }
+        return d;
+    }
+    const data_RespirationRate = () => {
+        const { data_RespirationRate } = healthData;
+
+        let dates = [];
+        let values1 = [];
+        //how many records to display in charts-> blood-> blood pressure chart
+        let displayedRecs = 7; 
+        for (let index = 0; index < data_RespirationRate.length; index++) {
+            //leave if we add 7 records or less
+            if(index>displayedRecs) break;
+            
+            dates.push(dateFormat(data_RespirationRate[index].date, "mmm d"));
+            values1.push(data_RespirationRate[index].value);
+            
+        }
+        const d = {
+            labels: dates,
+            datasets: [
+                {
+                    label: getText('Value')+" (BPM)",
+                    backgroundColor: 'rgba(29,100,10,.01)',
+                    borderColor:'rgba(50,100,10,1)',
+                    borderWidth: 1,
+                    data:values1,
+                    lineTension: .2,
+                }
+            ],
+        }
+        return d;
+    }
 
 
 
     return (
         <S_container  theme={theme}>
 
-             <S_cart theme={theme} onClick={() => openDetailedDataPage(HealthDataType.BloodPressure)}>
+             <S_cart  theme={theme} onClick={() => openDetailedDataPage(HealthDataType.BloodPressure)}>
                 <S_cart_title theme={theme}>{getText('Blood Pressure')}</S_cart_title>
                 <S_cart_body theme={theme}>
                     <Line data={data_bloodPressure()}
@@ -87,7 +201,44 @@ export default function CompChartBlood() {
                 </S_cart_body>
             </S_cart> 
 
+             <S_cart theme={theme} onClick={() => openDetailedDataPage(HealthDataType.SugarLevels)}>
+                <S_cart_title theme={theme}>{getText('Sugar Levels')}</S_cart_title>
+                <S_cart_body theme={theme}>
+                    <Line data={data_sugarLevels()}
+                        options={{ responsive: true, }}
+                    />
+                </S_cart_body>
+            </S_cart> 
+
             
+             <S_cart theme={theme} onClick={() => openDetailedDataPage(HealthDataType.CholesterolLevels)}>
+                <S_cart_title theme={theme}>{getText('Cholesterol Levels')}</S_cart_title>
+                <S_cart_body theme={theme}>
+                    <Bar data={data_CholesterolLevels()}
+                        options={{ responsive: true, }}
+                    />
+                </S_cart_body>
+            </S_cart> 
+
+            
+            
+             <S_cart theme={theme} onClick={() => openDetailedDataPage(HealthDataType.PulseRate)}>
+                <S_cart_title theme={theme}>{getText('Pulse Rate')}</S_cart_title>
+                <S_cart_body theme={theme}>
+                    <Line data={data_PulseRate()}
+                        options={{ responsive: true, }}
+                    />
+                </S_cart_body>
+            </S_cart> 
+            
+             <S_cart theme={theme} onClick={() => openDetailedDataPage(HealthDataType.RespirationRate)}>
+                <S_cart_title theme={theme}>{getText('Respiration Rate')}</S_cart_title>
+                <S_cart_body theme={theme}>
+                    <Line data={data_RespirationRate()}
+                        options={{ responsive: true, }}
+                    />
+                </S_cart_body>
+            </S_cart> 
 
         </S_container>
     );
@@ -100,11 +251,10 @@ const S_container = styled.div`
 
         display : flex;
         flex-wrap:wrap;
-        height:100%;
+        height:90%;
         width:100%;
         gap:2rem;
-        justify-content:space-around;
-        padding-top:2rem;
+        padding:2rem 0;
         overflow:scroll;
 
         &::-webkit-scrollbar{
@@ -125,7 +275,8 @@ const S_cart = styled.div`
     width : 29rem;
     height : fit-content;
     display : flex;
-
+    margin-left:1rem;
+        
     flex-direction : column;
     border-radius:10px;
     :hover {

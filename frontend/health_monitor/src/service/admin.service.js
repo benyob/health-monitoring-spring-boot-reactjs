@@ -1,6 +1,5 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-import { HealthDataType } from './HelperClass';
 
 const API_URL = 'http://localhost:8080/api/v1/admin';
 

@@ -45,6 +45,11 @@ public class User {
 	@Size(max = 120)
 	private String password;
 
+//	// notifications
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private List<Notification> notifications = new ArrayList<>();
+
 	// ************* ROLES *****************
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -52,8 +57,7 @@ public class User {
 
 	// *********** Health Data ****************//
 	// Blood pressure
-	@OneToMany(cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private List<BloodPressure> dataBloodPressure = new ArrayList<>();
 
@@ -156,6 +160,7 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
 	public List<BloodPressure> getDataBloodPressure() {
 		return dataBloodPressure;
 	}
@@ -251,7 +256,15 @@ public class User {
 	public void setDataSodium(List<Sodium> dataSodium) {
 		this.dataSodium = dataSodium;
 	}
-	
-	
-	
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+
+
 }

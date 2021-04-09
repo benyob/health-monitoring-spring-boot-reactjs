@@ -16,8 +16,8 @@ export default function CompAdmin () {
             <Container>
                 <p>Admin board</p>
                 all users :
-                {users.map(m=>{
-                   return<p>{m}</p>
+                {users.map((m,i)=>{
+                   return<p key={i}>{m}</p>
                 })}
             </Container>
         )

@@ -4,13 +4,14 @@ public enum HealthDataType {
 	BloodPressure,
 	PulseRate,
 	RespirationRate,
-	CholesterolLevel,
-	SugarLevel,
+	CholesterolLevels,
+	SugarLevels,
 	Temperature,
 	SleepingHours,
 	Weight,
 	Calories, 
 	Sodium,
 	Carbohydrate,
-	Protein 
+	Protein,
+	none
 }

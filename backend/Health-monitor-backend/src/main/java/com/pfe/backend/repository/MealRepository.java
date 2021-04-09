@@ -12,6 +12,6 @@ import com.pfe.backend.model.RoleType;
 @Repository
 public interface MealRepository extends JpaRepository<Meal, Integer> {
 	
-	Boolean existsByName(String name);
-	Optional<Meal> findByName(String name);
+	Boolean existsByDescription(String description);
+	Optional<Meal> findByDescription(String description);
 }

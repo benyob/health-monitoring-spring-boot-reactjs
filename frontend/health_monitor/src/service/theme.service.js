@@ -1,3 +1,40 @@
+import ic_arrow_left from '../Exported Assets/ic_left_arrow.svg'
+import ic_delete from '../Exported Assets/ic_delete.svg'
+import ic_edit from '../Exported Assets/ic_edit.svg'
+import ic_check from '../Exported Assets/ic_check.svg'
+import ic_x from '../Exported Assets/ic_x.svg'
+import ic_bar from '../Exported Assets/ic_bar.svg'
+import ic_line from '../Exported Assets/ic_navbar_charts.svg'
+import ic_search from '../Exported Assets/ic_navbar_search.svg'
+import ic_search_white from '../Exported Assets/ic_search_white.svg'
+export const colsRgba=
+[
+    "rgba(137, 196, 244,.6)",
+    "rgba(228, 241, 254,.6)",
+    "rgba(58, 83, 155, ,.6)",
+    "rgba(241, 196, 15,.6)",
+    "rgba(26, 188, 156,.6)",
+    "rgba(155, 89, 182,.6)",
+    "rgba(142, 68, 173,.6)",
+    "rgba(231, 76, 60,.6)",
+    "rgba(230, 126, 34,.6)",
+    "rgba(211, 84, 0,.6)",
+    "rgba(52, 231, 228,.6)",
+    "rgba(255, 221, 89,.6)",
+    "rgba(255, 192, 72,.6)",
+    "rgba(0, 216, 214,.6)",
+    "rgba(5, 196, 107,.6)",
+]
+export const icons = {
+    ic_arrow_left,ic_search,ic_search_white,
+    ic_delete,
+    ic_edit,
+    ic_check,
+    ic_x,
+    ic_bar,
+    ic_line,
+}
+
 export const colsGraph = [
     '#8ac4d0',
     '#282846',
@@ -24,6 +61,9 @@ export const cols = {
     white: 'white',
     gray: '#879BAA',
     red: '#EA3838',
+    warning: '#ff7171',
+    alert: '#16c79a',
+    advice: '#ffb037',
 }
 
 export const themes = {
@@ -120,6 +160,7 @@ class ThemeService {
     setLightTheme() {
         localStorage.setItem('theme', 'light')
     }
+
     setDarkTheme() {
         localStorage.setItem('theme', 'dark')
     }

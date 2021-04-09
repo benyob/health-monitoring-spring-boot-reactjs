@@ -13,34 +13,111 @@ public class Meal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String name;
-	
-	private float calories;
+	private String description;
+	private float protein;
+	private float fat;
+	private float carbohydrate;
+	private float energy;
+	private float sugars;
+	private float water;
+
 	
 	public Meal() {}
-	public Meal(String name, float calories) {
+
+
+	public Meal(String description, float protein, float fat, float carbohydrate, float energy, float sugars,
+			float water) {
 		super();
-		this.name = name;
-		this.calories = calories;
+		this.description = description;
+		this.protein = protein;
+		this.fat = fat;
+		this.carbohydrate = carbohydrate;
+		this.energy = energy;
+		this.sugars = sugars;
+		this.water = water;
 	}
+
+
 	public Integer getId() {
 		return id;
 	}
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+
+	public String getDescription() {
+		return description;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public float getCalories() {
-		return calories;
+
+
+	public float getProtein() {
+		return protein;
 	}
-	public void setCalories(float calories) {
-		this.calories = calories;
+
+
+	public void setProtein(float protein) {
+		this.protein = protein;
 	}
+
+
+	public float getFat() {
+		return fat;
+	}
+
+
+	public void setFat(float fat) {
+		this.fat = fat;
+	}
+
+
+	public float getCarbohydrate() {
+		return carbohydrate;
+	}
+
+
+	public void setCarbohydrate(float carbohydrate) {
+		this.carbohydrate = carbohydrate;
+	}
+
+
+	public float getEnergy() {
+		return energy;
+	}
+
+
+	public void setEnergy(float energy) {
+		this.energy = energy;
+	}
+
+
+	public float getSugars() {
+		return sugars;
+	}
+
+
+	public void setSugars(float sugars) {
+		this.sugars = sugars;
+	}
+
+
+	public float getWater() {
+		return water;
+	}
+
+
+	public void setWater(float water) {
+		this.water = water;
+	}
+
+
 	
 	
 }

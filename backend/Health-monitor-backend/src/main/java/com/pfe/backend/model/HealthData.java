@@ -18,14 +18,20 @@ public class HealthData {
 	private float value;
 	
 	private String note;
-	private Date date = new Date();
+	private Date date;
 	
 	public HealthData() {}
-	
-	public HealthData(float value, String note) {
+	public void update(HealthData d)
+	{
+		this.value = d.getValue();
+		this.note = d.getNote();
+		this.date=d.getDate();
+	}
+	public HealthData(float value, String note ,Date date) {
 		super();
 		this.value = value;
 		this.note = note;
+		this.date=date;
 	}
 	public long getId() {
 		return id;

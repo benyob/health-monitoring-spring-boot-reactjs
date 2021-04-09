@@ -3,7 +3,7 @@ import React from 'react'
 export default function CompChartNutrition() {
     return (
         <div>
-            nutrition related charts
+            nutrition related charts (chart)
         </div>
     )
 }
