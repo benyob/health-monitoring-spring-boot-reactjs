@@ -24,6 +24,12 @@ public class Notification {
 	@Column
 	private Date date = new Date();
 
+	@Column
+	private boolean dismissed=false;
+	
+	
+
+
 	//id of first record the evaluation started from
 	@Column
 	private long startId;
@@ -43,7 +49,6 @@ public class Notification {
 	public Notification() {}
 
 
-
 	public Notification(String content, long startId, long endId, NotificationType type,
 			HealthDataType targetHealthDataType) {
 		super();
@@ -53,7 +58,6 @@ public class Notification {
 		this.type = type;
 		this.targetHealthDataType = targetHealthDataType;
 	}
-
 
 
 	public long getId() {
@@ -82,6 +86,15 @@ public class Notification {
 
 	public NotificationType getType() {
 		return type;
+	}
+	public boolean isDismissed() {
+		return dismissed;
+	}
+
+
+
+	public void setDismissed(boolean dismissed) {
+		this.dismissed = dismissed;
 	}
 
 	public void setType(NotificationType type) {

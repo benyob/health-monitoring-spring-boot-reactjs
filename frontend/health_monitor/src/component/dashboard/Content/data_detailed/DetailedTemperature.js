@@ -9,7 +9,7 @@ import languageService from '../../../../service/language.service';
 import { cols, colsGraph, themes, icons } from '../../../../service/theme.service';
 import { HealthDataContex } from '../../../CompDashboard';
 
-export default function DetailedTemperature() {
+export default function DetailedTemperature(props) {
 
     //get empty data to fill and share across all comps
     const { healthData, updateHealthData } = useContext(HealthDataContex)
@@ -125,7 +125,7 @@ export default function DetailedTemperature() {
         <Container>
 
             <S_cart_title theme={theme}>{getText('Temperature')}</S_cart_title>
-            <S_cart theme={theme} >
+            <S_cart >
                 <S_cart_body theme={theme}>
                     {chartType === 'line'
                         ? <Line data={chartdata_Temperature()}
@@ -139,7 +139,7 @@ export default function DetailedTemperature() {
                         : <></>}
                 </S_cart_body>
                 <Flag>
-                    <p>{getText('Reference Value') + " :36.1 - 37.6°C"}</p>
+                <p data-tip={props.refValue}>{getText("Reference Value")}</p>    
                     <div>
 
                         <p onClick={() => setChartType('line')}>
@@ -187,7 +187,6 @@ export default function DetailedTemperature() {
                 }
                 </FormAddRecord>
             </Cont_TableRecord>
-            <S_cart_title theme={theme}>{getText('Extra')}</S_cart_title>
 
         </Container>
     )

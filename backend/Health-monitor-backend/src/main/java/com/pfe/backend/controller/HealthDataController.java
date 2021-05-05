@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pfe.backend.model.HealthData;
 import com.pfe.backend.model.HealthDataType;
+import com.pfe.backend.model.Notification;
 import com.pfe.backend.model.Role;
 import com.pfe.backend.model.RoleType;
 import com.pfe.backend.model.User;
@@ -41,15 +42,21 @@ import com.pfe.backend.model.healthdata.Temperature;
 import com.pfe.backend.model.healthdata.Weight;
 import com.pfe.backend.payload.request.RegisterRequest;
 import com.pfe.backend.payload.response.MessageResponse;
+import com.pfe.backend.repository.NotificationsRepository;
 import com.pfe.backend.repository.UserRepository;
 import com.pfe.backend.repository.healthdata.BloodPressureRepository;
+import com.pfe.backend.repository.healthdata.CaloriesRepository;
+import com.pfe.backend.repository.healthdata.CarbohydrateRepository;
 import com.pfe.backend.repository.healthdata.CholesterolLevelRepository;
+import com.pfe.backend.repository.healthdata.ProteinRepository;
 import com.pfe.backend.repository.healthdata.PulseRateRepository;
 import com.pfe.backend.repository.healthdata.RespirationRateRepository;
 import com.pfe.backend.repository.healthdata.SleepingHoursRepository;
+import com.pfe.backend.repository.healthdata.SodiumRepository;
 import com.pfe.backend.repository.healthdata.SugarLevelRepository;
 import com.pfe.backend.repository.healthdata.TemperatureRepository;
 import com.pfe.backend.repository.healthdata.WeightRepository;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -59,6 +66,9 @@ public class HealthDataController {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	NotificationsRepository notifiRepo;
+	
 	@Autowired
 	BloodPressureRepository bloodPressuerRepo;
 
@@ -83,6 +93,15 @@ public class HealthDataController {
 	@Autowired
 	WeightRepository WeightRepo;
 
+	@Autowired
+	CaloriesRepository caloriestRepo;
+	@Autowired
+	ProteinRepository proteinRepo;
+	@Autowired
+	CarbohydrateRepository carboRepo;
+	@Autowired
+	SodiumRepository sodiumRepo;
+	
 	// ******** CREATE RECORDS ***************
 	@PostMapping("/user/{id}/setBloodPressure")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
@@ -258,6 +277,38 @@ public class HealthDataController {
 				} else
 					return false;
 				break;
+			case Protein:
+				Protein s8 = proteinRepo.findById(id).orElse(null);
+				if (s8  != null) {
+					s8 .update(healthData);
+					proteinRepo.save(s8 );
+				} else
+					return false;
+				break;
+			case Sodium:
+				Sodium s9 = sodiumRepo.findById(id).orElse(null);
+				if (s9 != null) {
+					s9.update(healthData);
+					sodiumRepo.save(s9);
+				} else
+					return false;
+				break;
+			case Calories:
+				Calories s10 = caloriestRepo.findById(id).orElse(null);
+				if (s10 != null) {
+					s10.update(healthData);
+					caloriestRepo.save(s10);
+				} else
+					return false;
+				break;
+			case Carbohydrate:
+				Carbohydrate s11 = carboRepo.findById(id).orElse(null);
+				if (s11 != null) {
+					s11.update(healthData);
+					carboRepo.save(s11);
+				} else
+					return false;
+				break;
 			default:
 				return false;
 
@@ -307,12 +358,126 @@ public class HealthDataController {
 
 			break;
 		case Weight:
-
 			WeightRepo.deleteById(record_id);
-
+			break;
+			
+		case Protein:
+			proteinRepo.deleteById(record_id);
+			
+			break;
+		case Sodium:
+			sodiumRepo.deleteById(record_id);
+			
+			break;
+		case Calories:
+		 caloriestRepo.deleteById(record_id);
+	
+			break;
+		case Carbohydrate:
+			carboRepo.deleteById(record_id);
+	
 			break;
 		default:
 			break;
+		}
+	}
+
+	@GetMapping("/admin/resetdata/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public boolean resetUserData(@PathVariable Long id) {
+		try {
+			User u = userRepository.findById(id).orElse(null);
+			if(null != u) {
+				List<Long> i = new ArrayList<Long>();
+				
+				//---
+				i=u.healthDataIds(HealthDataType.BloodPressure);
+				u.Clear(HealthDataType.BloodPressure);
+				userRepository.save(u);
+				bloodPressuerRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.Calories);
+				u.Clear(HealthDataType.Calories);
+				userRepository.save(u);
+				caloriestRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.Carbohydrate);
+				u.Clear(HealthDataType.Carbohydrate);
+				userRepository.save(u);
+				carboRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.CholesterolLevels);
+				u.Clear(HealthDataType.CholesterolLevels);
+				userRepository.save(u);
+				CholesterolLevelRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.Protein);
+				u.Clear(HealthDataType.Protein);
+				userRepository.save(u);
+				proteinRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.PulseRate);
+				u.Clear(HealthDataType.PulseRate);
+				userRepository.save(u);
+				PulseRateRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.RespirationRate);
+				u.Clear(HealthDataType.RespirationRate);
+				userRepository.save(u);
+				RespirationRateRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.SleepingHours);
+				u.Clear(HealthDataType.SleepingHours);
+				userRepository.save(u);
+				SleepingHoursRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.Sodium);
+				u.Clear(HealthDataType.Sodium);
+				userRepository.save(u);
+				sodiumRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.SugarLevels);
+				u.Clear(HealthDataType.SugarLevels);
+				userRepository.save(u);
+				SugarLevelRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.Temperature);
+				u.Clear(HealthDataType.Temperature);
+				userRepository.save(u);
+				TemperatureRepo.deleteByIdIn(i);
+				
+				//---
+				i=u.healthDataIds(HealthDataType.Weight);
+				u.Clear(HealthDataType.Weight);
+				userRepository.save(u);
+				WeightRepo.deleteByIdIn(i);
+				
+				//---
+				i.clear();
+				for (Notification n : u.getNotifications()) {
+					i.add(n.getId());
+				}
+				u.getNotifications().clear();
+				userRepository.save(u);
+				notifiRepo.deleteByIdIn(i);
+				
+				
+				
+			}
+			return true;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return false;
 		}
 	}
 }

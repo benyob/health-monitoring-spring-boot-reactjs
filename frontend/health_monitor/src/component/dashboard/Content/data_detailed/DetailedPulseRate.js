@@ -9,7 +9,7 @@ import languageService from '../../../../service/language.service';
 import ThemeService, { cols, colsGraph, themes, icons, colsRgba } from '../../../../service/theme.service';
 import { HealthDataContex } from '../../../CompDashboard';
 
-export default function DetailedPulseRate() {
+export default function DetailedPulseRate(props) {
 
     //get empty data to fill and share across all comps
     const { healthData, updateHealthData } = useContext(HealthDataContex)
@@ -125,7 +125,7 @@ export default function DetailedPulseRate() {
         <Container>
 
             <S_cart_title theme={theme}>{getText('Pulse Rate')}</S_cart_title>
-            <S_cart theme={theme} >
+            <S_cart  >
                 <S_cart_body theme={theme}>
                     {chartType === 'line'
                         ? <Line data={chartdata_PulseRate()}
@@ -139,8 +139,7 @@ export default function DetailedPulseRate() {
                         : <></>}
                 </S_cart_body>
                 <Flag>
-                    <p>{getText('Reference Value') + " :  60 - 100 BMP"}</p>
-                    <div>
+                <p data-tip={props.refValue}>{getText("Reference Value")}</p>                        <div>
 
                         <p onClick={() => setChartType('line')}>
                             <img src={icons.ic_line} alt="" />
@@ -187,7 +186,6 @@ export default function DetailedPulseRate() {
                 }
                 </FormAddRecord>
             </Cont_TableRecord>
-            <S_cart_title theme={theme}>{getText('Extra')}</S_cart_title>
 
         </Container>
     )

@@ -120,7 +120,104 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-
+	//methods
+	public boolean isAdmin() {
+		for (Role r : roles) {
+			if(r.getName()==RoleType.ROLE_ADMIN) return true;
+		}
+		return false;
+	}
+	public List<Long> healthDataIds(HealthDataType type){
+		List<Long> ids = new ArrayList<Long>();
+		
+		switch (type) {
+		case BloodPressure:
+			dataBloodPressure.forEach(e->ids.add(e.getId()));
+			break;
+		case Calories:
+			dataCalories.forEach(e->ids.add(e.getId()));
+			break;
+		case Carbohydrate:
+			dataCarbohydrate.forEach(e->ids.add(e.getId()));
+			break;
+		case CholesterolLevels:
+			dataCholesterolLevel.forEach(e->ids.add(e.getId()));
+			break;
+		case Protein:
+			dataProtein.forEach(e->ids.add(e.getId()));
+			break;
+		case PulseRate:
+			dataPulseRate.forEach(e->ids.add(e.getId()));
+			break;
+		case RespirationRate:
+			dataRespirationRate.forEach(e->ids.add(e.getId()));
+			break;
+		case SleepingHours:
+			dataSleepingHours.forEach(e->ids.add(e.getId()));
+			break;
+		case Sodium:
+			dataSodium.forEach(e->ids.add(e.getId()));
+			break;
+		case SugarLevels:
+			dataSugarLevel.forEach(e->ids.add(e.getId()));
+			break;
+		case Temperature:
+			dataTemperature.forEach(e->ids.add(e.getId()));
+			break;
+		case Weight:
+			dataWeight.forEach(e->ids.add(e.getId()));
+			break;
+			
+		default:
+			break;
+		}
+		
+		return ids;
+	}
+	public void Clear(HealthDataType type) {
+		switch (type) {
+		case BloodPressure:
+			dataBloodPressure.clear();
+			break;
+		case Calories:
+			dataCalories.clear();
+			break;
+		case Carbohydrate:
+			dataCarbohydrate.clear();
+			break;
+		case CholesterolLevels:
+			dataCholesterolLevel.clear();
+			break;
+		case Protein:
+			dataProtein.clear();
+			break;
+		case PulseRate:
+			dataPulseRate.clear();
+			break;
+		case RespirationRate:
+			dataRespirationRate.clear();
+			break;
+		case SleepingHours:
+			dataSleepingHours.clear();
+			break;
+		case Sodium:
+			dataSodium.clear();
+			break;
+		case SugarLevels:
+			dataSugarLevel.clear();
+			break;
+		case Temperature:
+			dataTemperature.clear();
+			break;
+		case Weight:
+			dataWeight.clear();
+			break;
+			
+		default:
+			break;
+		}
+	}
+	//setters and getters
 	public Long getId() {
 		return id;
 	}
@@ -260,7 +357,13 @@ public class User {
 	public List<Notification> getNotifications() {
 		return notifications;
 	}
-
+	public List<Notification> getUndismissedNotifications(){
+		List<Notification> n = new ArrayList<>();
+		for (Notification notification : notifications) {
+			if(!notification.isDismissed()) n.add(notification);
+		}
+		return n;
+	}
 	public void setNotifications(List<Notification> notifications) {
 		this.notifications = notifications;
 	}

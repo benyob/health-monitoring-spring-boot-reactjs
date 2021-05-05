@@ -13,14 +13,17 @@ import HelperClass from '../service/HelperClass'
 import CompDetailedData from './dashboard/Content/CompDetailedData';
 import { HealthDataType } from '../service/HelperClass'
 import healthDataService from '../service/healthData.service';
-import CompAdmin from './dashboard/Content/CompAdmin';
-import nutritionSerivce from '../service/nutrition.serivce';
-import notificationsService from '../service/notifications.service';
+import CompAdminGenerale from './dashboard/Content/CompAdminGenerale';
+import CompAdminCustomize from './dashboard/Content/CompAdminCustomize';
+import notificationsService, { NotifyMeType } from '../service/notifications.service';
 import CompNotifications from './dashboard/Content/CompNotifications';
+import CompNutritionGenerate from './dashboard/Content/CompNutritionGenerate';
+import CompNutritionCustomizedMeals from './dashboard/Content/CompNutritionCustomizedMeals';
 //responsile for passing the method that opens detaailed data page
 export const DetailedDataPageContext = React.createContext()
 export const HealthDataContex = React.createContext();
 
+// fn_notifyMeThat("be carfull",NotifyMeType.yellow)
 export default class CompDashboard extends Component {
     constructor(props) {
         super(props);
@@ -33,6 +36,7 @@ export default class CompDashboard extends Component {
         this.openDetailedDataPage = this.openDetailedDataPage.bind(this);
         this.updateHealthData = this.updateHealthData.bind(this);
         this.fn_resetUnreadNotifications = this.fn_resetUnreadNotifications.bind(this);
+        this.getAllNotifications = this.getAllNotifications.bind(this);
         this.state = {
             isAdmin: false,
             currentUser: undefined,
@@ -83,6 +87,8 @@ export default class CompDashboard extends Component {
         AuthService.logout();
         this.props.history.push("/auth");
     }
+
+    
     componentDidMount() {
        
         //get new notifications
@@ -92,6 +98,9 @@ export default class CompDashboard extends Component {
             notificationsService.getNotifications().then(res=>{
                 this.setState({notifications:res.data});
             })
+            if(res.data.length>0){
+                this.props.fn_notifyMeThat("You have "+res.data.length+" new notifications",NotifyMeType.blue)
+            }
         })
         
            
@@ -143,19 +152,37 @@ export default class CompDashboard extends Component {
         healthDataService.getHealthData(HealthDataType.Temperature).then(res=>{
             this.setState(this.state.healthData.data_Temperature=res.data)
         });
+        //*** */
+        healthDataService.getHealthData(HealthDataType.Protein).then(res=>{
+            this.setState(this.state.healthData.data_Protein=res.data)
+        });
+        healthDataService.getHealthData(HealthDataType.Sodium).then(res=>{
+            this.setState(this.state.healthData.data_Sodium=res.data)
+        });
+        healthDataService.getHealthData(HealthDataType.Carbohydrate).then(res=>{
+            this.setState(this.state.healthData.data_Carbohydrate=res.data)
+        });
+        healthDataService.getHealthData(HealthDataType.Calories).then(res=>{
+            this.setState(this.state.healthData.data_Calories=res.data)
+        });
         //
        
+    }
+    getAllNotifications(){
+         //get all notifications
+         notificationsService.getNotifications().then(res=>{
+            this.setState({notifications:res.data.reverse()});
+        })
     }
     updateHealthData (dataType)
     {
         //get new notifications
         notificationsService.getNotified().then(res=>{
             this.setState({unreadNotifications:[...this.state.unreadNotifications,...res.data]});
-
-            //get all notifications
-            notificationsService.getNotifications().then(res=>{
-                this.setState({notifications:res.data});
-            })
+            this.getAllNotifications();
+            if(res.data.length>0){
+                this.props.fn_notifyMeThat("You have "+this.state.unreadNotifications.length+" new notifications",NotifyMeType.blue)
+            }
         })
         
         
@@ -200,7 +227,27 @@ export default class CompDashboard extends Component {
                     this.setState(this.state.healthData.data_Temperature=res.data)
                 });
                 break;
-                
+                //
+                case HealthDataType.Protein:
+                    healthDataService.getHealthData(HealthDataType.Protein).then(res=>{
+                    this.setState(this.state.healthData.data_Protein=res.data)
+                });
+                break;
+                case HealthDataType.Sodium:
+                    healthDataService.getHealthData(HealthDataType.Sodium).then(res=>{
+                    this.setState(this.state.healthData.data_Sodium=res.data)
+                });
+                break;
+                case HealthDataType.Carbohydrate:
+                    healthDataService.getHealthData(HealthDataType.Carbohydrate).then(res=>{
+                    this.setState(this.state.healthData.data_Carbohydrate=res.data)
+                });
+                break;
+                case HealthDataType.Calories:
+                    healthDataService.getHealthData(HealthDataType.Calories).then(res=>{
+                    this.setState(this.state.healthData.data_Calories=res.data)
+                });
+                break;
                 default:
                     break;
         }
@@ -208,6 +255,7 @@ export default class CompDashboard extends Component {
         
     }
     render() {
+        
         return (
             <BrowserRouter>
                 <div className="dashboard-container">
@@ -218,14 +266,17 @@ export default class CompDashboard extends Component {
                         
                         <div className="dashboard-content">
                             <Switch>
+                                    <Route exact path="/dashboard/nutrition/search" component={CompNutritionSearch} />
+                                    <Route exact path="/dashboard/nutrition/generatemeal" component={CompNutritionGenerate} />
+                                    <Route exact path="/dashboard/nutrition/customizedmeal" component={CompNutritionCustomizedMeals} />
+                                    <Route exact path="/dashboard/admin/general" component={CompAdminGenerale} />
+                                    <Route exact path="/dashboard/admin/customize" component={CompAdminCustomize} />
+                                    <Route exact path="/dashboard/settings" component={CompSettings} />
+                                    <Route exact path="/dashboard/notifications" render={(props)=>(<CompNotifications {...props} getAllNotifications={this.getAllNotifications} notifications={this.state.notifications}/>)} />
                                 <DetailedDataPageContext.Provider value={this.openDetailedDataPage}>
                                     <Route exact path="/dashboard/charts/blood" component={CompChartBlood} />
                                     <Route exact path="/dashboard/charts/body" component={CompChartBody} />
                                     <Route exact path="/dashboard/charts/nutrition" component={CompChartNutrition} />
-                                    <Route exact path="/dashboard/nutrition/search" component={CompNutritionSearch} />
-                                    <Route exact path="/dashboard/settings" component={CompSettings} />
-                                    <Route exact path="/dashboard/admin" component={CompAdmin} />
-                                    <Route exact path="/dashboard/notifications" render={(props)=>(<CompNotifications {...props} notifications={this.state.notifications.reverse()}/>)} />
                                 </DetailedDataPageContext.Provider>
                             </Switch>
                         </div>

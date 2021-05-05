@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
-import { cols } from '../../../service/theme.service';
+import { cols, themes } from '../../../service/theme.service';
 import dateFormat from 'dateformat'
+import notificationsService from '../../../service/notifications.service';
+import { MyThemeContext } from '../../../App';
+import languageService from '../../../service/language.service';
+const getText = (i) => {
+    return languageService.getText(i)
+}
 export default function CompNotifications(props) {
+    const { theme } = useContext(MyThemeContext)
+
     const notifications = props.notifications;
+    const getAllNotifications=props.getAllNotifications;
+    const dismissNotification=(id)=>{
+       
+        notificationsService.dismissNotification(id).then(r=>{
+            getAllNotifications();
+           
+        })
+    }
     const container = notifications.map((n,i)=>{
         let col = cols.white;
         if(n.type==="Warning") col=cols.warning;
@@ -13,23 +29,65 @@ export default function CompNotifications(props) {
                 <span>{dateFormat(n.date ,"mmmm dS ,yyyy ,HH:MM TT")}</span>
         
                 <div id="notification-title">
-                    <p style={{fontWeight:500}}>{n.type}</p>
+                    <p style={{fontWeight:500,marginLeft:"1.5rem"}}>{getText(n.type)}</p>
                     <p style={{color:cols.white}}>{n.targetHealthDataType}</p>
                     </div>
                 <NotificationContent>
                     <p>{n.content}</p>
                 </NotificationContent>
+                <Dismiss onClick={()=>dismissNotification(n.id)}><p>{getText("Dismiss")}</p></Dismiss>
             </Notification>
     })
+    const themeChange={
+        dark:{
+            backgroundColor:cols.black,
+            transition:"all .5s",
+            outline:"2px solid white",
+            
+        },
+        light:{
+            backgroundColor:cols.unclear_white,
+            transition:"all .5s",
+        },
+    }
     return (
-        <Containeer>
+        <Containeer style={theme===themes.dark?themeChange.dark:themeChange.light}
+        >
          <div>
             {container}
-             
          </div>
         </Containeer>
     )
 }
+const Dismiss=styled.div`
+    // border:1px solid ${cols.red};
+    position :absolute;
+    top:0;
+    
+    height:3rem;
+    width:2rem;
+    border-radius:1rem;
+    border-bottom-left-radius:0;
+    background-color:${cols.dismiss};
+    color:${cols.white};
+    overflow:hidden;
+    display:grid;
+    place-items:center;
+    opacity:.2;
+    >p{
+        opacity:0;
+        font-weight:600;
+    }
+
+    :hover{
+        width:10ch;
+        opacity:1;
+        >p{
+            opacity:1;
+        }   
+    }
+    transition :all .25s;
+`;
 const NotificationContent=styled.div`
     padding: 0 2rem;
     max-width:70%;

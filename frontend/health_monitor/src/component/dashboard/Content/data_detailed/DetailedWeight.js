@@ -9,7 +9,7 @@ import languageService from '../../../../service/language.service';
 import { cols, colsGraph, themes, icons } from '../../../../service/theme.service';
 import { HealthDataContex } from '../../../CompDashboard';
 
-export default function DetailedWeight() {
+export default function DetailedWeight(props) {
 
     //get empty data to fill and share across all comps
     const { healthData, updateHealthData } = useContext(HealthDataContex)
@@ -124,8 +124,8 @@ export default function DetailedWeight() {
     return (
         <Container>
 
-            <S_cart_title theme={theme}>{getText('Pulse Rate')}</S_cart_title>
-            <S_cart theme={theme} >
+            <S_cart_title theme={theme}>{getText('Weight')}</S_cart_title>
+            <S_cart  >
                 <S_cart_body theme={theme}>
                     {chartType === 'line'
                         ? <Line data={chartdata_Weight()}
@@ -139,7 +139,7 @@ export default function DetailedWeight() {
                         : <></>}
                 </S_cart_body>
                 <Flag>
-                    <p>{getText('Reference Value') + " :55-74 Kg"}</p>
+                <p data-tip={props.refValue}>{getText("Reference Value")}</p>    
                     <div>
 
                         <p onClick={() => setChartType('line')}>
@@ -188,7 +188,7 @@ export default function DetailedWeight() {
                     }
                 </FormAddRecord>
             </Cont_TableRecord>
-            <S_cart_title theme={theme}>{getText('Extra')}</S_cart_title>
+            
 
         </Container>
     )

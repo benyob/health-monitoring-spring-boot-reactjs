@@ -20,7 +20,9 @@ public class Meal {
 	private float energy;
 	private float sugars;
 	private float water;
-
+	
+	private String thumbnailUrl;
+	private String AmountPer;
 	
 	public Meal() {}
 
@@ -35,6 +37,26 @@ public class Meal {
 		this.energy = energy;
 		this.sugars = sugars;
 		this.water = water;
+	}
+
+
+	public String getThumbnailUrl() {
+		return thumbnailUrl;
+	}
+
+
+	public void setThumbnailUrl(String thumbnailUrl) {
+		this.thumbnailUrl = thumbnailUrl;
+	}
+
+
+	public String getAmountPer() {
+		return AmountPer;
+	}
+
+
+	public void setAmountPer(String amountPer) {
+		AmountPer = amountPer;
 	}
 
 

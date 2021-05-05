@@ -1,5 +1,5 @@
 .dashboard-content{
     grid-area: dashboard-content;
-    background-color: var(--col_unclear_white);
+    
     border-radius: var(--main_radius) 0 0 0;
 }

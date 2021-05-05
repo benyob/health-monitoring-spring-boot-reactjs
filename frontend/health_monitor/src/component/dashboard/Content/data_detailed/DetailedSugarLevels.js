@@ -9,7 +9,7 @@ import languageService from '../../../../service/language.service';
 import { cols, colsGraph, themes, icons, colsRgba } from '../../../../service/theme.service';
 import { HealthDataContex } from '../../../CompDashboard';
 
-export default function DetailedSugarLevels() {
+export default function DetailedSugarLevels(props) {
 
     //get empty data to fill and share across all comps
     const { healthData, updateHealthData } = useContext(HealthDataContex)
@@ -125,7 +125,7 @@ export default function DetailedSugarLevels() {
         <Container>
 
             <S_cart_title theme={theme}>{getText('Sugar Levels')}</S_cart_title>
-            <S_cart theme={theme} >
+            <S_cart  >
                 <S_cart_body theme={theme}>
                     {chartType === 'line'
                         ? <Line data={chartData_sugarLevels()}
@@ -139,7 +139,7 @@ export default function DetailedSugarLevels() {
                         : <></>}
                 </S_cart_body>
                 <Flag>
-                    <p>{getText('Reference Value') + " : 4.0 mmol/L -> 7.8 mmol/L."}</p>
+                <p data-tip={props.refValue}>{getText("Reference Value")}</p>
                     <div>
 
                         <p onClick={() => setChartType('line')}>
@@ -187,7 +187,6 @@ export default function DetailedSugarLevels() {
                 }
                 </FormAddRecord>
             </Cont_TableRecord>
-            <S_cart_title theme={theme}>{getText('Extra')}</S_cart_title>
 
         </Container>
     )

@@ -3,13 +3,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import styled, { css } from 'styled-components'
 import { MyThemeContext } from '../../../../App';
+import adminService from '../../../../service/admin.service';
 import healthDataService from '../../../../service/healthData.service';
-import { HealthDataType } from '../../../../service/HelperClass';
+import { HealthDataType, ReferenceValues } from '../../../../service/HelperClass';
 import languageService from '../../../../service/language.service';
 import { cols, colsGraph, themes, icons } from '../../../../service/theme.service';
 import { HealthDataContex } from '../../../CompDashboard';
 
-export default function DetailedBloodPressure() {
+export default function DetailedBloodPressure(props) {
 
     //get empty data to fill and share across all comps
     const { healthData, updateHealthData } = useContext(HealthDataContex)
@@ -145,11 +146,12 @@ export default function DetailedBloodPressure() {
         })
     }
 
+    
     return (
-        <Container>
+        <Container >
 
             <S_cart_title theme={theme}>{getText('Blood Pressure')}</S_cart_title>
-            <S_cart theme={theme} >
+            <S_cart >
                 <S_cart_body theme={theme}>
                     {chartType === 'line'
                         ? <Line data={chartData_bloodPressure()}
@@ -163,8 +165,7 @@ export default function DetailedBloodPressure() {
                         : <></>}
                 </S_cart_body>
                 <Flag>
-                    <p>{getText('Reference Value') + " : 120/80 (mmHg)"}</p>
-                    <div>
+                <p data-tip={props.refValue}>{getText("Reference Value")}</p>                    <div>
 
                         <p onClick={() => setChartType('line')}>
                             <img src={icons.ic_line} alt="" />
@@ -214,7 +215,6 @@ export default function DetailedBloodPressure() {
                 }
                 </FormAddRecord>
             </Cont_TableRecord>
-            <S_cart_title theme={theme}>{getText('Extra')}</S_cart_title>
 
         </Container>
     )
@@ -483,6 +483,7 @@ const Container = styled.div`
     display:flex;
     flex-direction:column;
     margin:0 auto 15rem auto;
+    
     `;
 
 const S_cart = styled.div`

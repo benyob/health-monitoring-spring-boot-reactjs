@@ -12,6 +12,7 @@
   --col_black : #052135;
   --col_white: white;
   --main_radius : 30px;
+  overflow: hidden;
 }
 
 /* .App > div{
@@ -21,7 +22,7 @@
 .App{
   height: 100vh;
   width: 100vw;
-  background-color: var(--col_white);
+  background-color: red;
 
   overflow: hidden;
 }
@@ -42,6 +43,7 @@
   overflow: hidden;
   background-color: white;
   display: grid;
+  gap:.1rem;
   grid-template-columns: .25fr 1fr .1fr;
   grid-template-rows: .1fr 1fr;
   grid-template-areas: "dashboard-navbar dashboard-navbar dashboard-navbar "

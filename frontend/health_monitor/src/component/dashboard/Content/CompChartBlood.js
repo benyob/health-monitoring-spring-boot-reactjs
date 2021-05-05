@@ -189,8 +189,20 @@ export default function CompChartBlood() {
 
 
 
+    const themeChange={
+        dark:{
+            backgroundColor:cols.black,
+            transition:"all .5s",
+            
+        },
+        light:{
+            backgroundColor:cols.unclear_white,
+            transition:"all .5s",
+        },
+        // style={theme===themes.dark?themeChange.dark:themeChange.light}
+    }
     return (
-        <S_container  theme={theme}>
+        <S_container  style={theme===themes.dark?themeChange.dark:themeChange.light}>
 
              <S_cart  theme={theme} onClick={() => openDetailedDataPage(HealthDataType.BloodPressure)}>
                 <S_cart_title theme={theme}>{getText('Blood Pressure')}</S_cart_title>
@@ -271,7 +283,7 @@ const S_container = styled.div`
     `;
 const S_cart = styled.div`
     // border:1px solid blue;
-    background:${props => props.theme === themes.dark ? cols.light_blue : cols.white};    
+    background:${props => props.theme === themes.dark ? cols.dark_blue : cols.white};    
     width : 29rem;
     height : fit-content;
     display : flex;

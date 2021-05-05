@@ -7,6 +7,11 @@ import ic_bar from '../Exported Assets/ic_bar.svg'
 import ic_line from '../Exported Assets/ic_navbar_charts.svg'
 import ic_search from '../Exported Assets/ic_navbar_search.svg'
 import ic_search_white from '../Exported Assets/ic_search_white.svg'
+import ic_to_right from '../Exported Assets/ic_to_right.svg'
+import ic_arrow_upward from '../Exported Assets/ic_arrow_upward-1.svg'
+import ic_arrow_downward from '../Exported Assets/ic_arrow_downward.svg'
+import ic_customize from '../Exported Assets/ic_customize.svg'
+import ic_general from '../Exported Assets/ic_general.svg'
 export const colsRgba=
 [
     "rgba(137, 196, 244,.6)",
@@ -27,9 +32,9 @@ export const colsRgba=
 ]
 export const icons = {
     ic_arrow_left,ic_search,ic_search_white,
-    ic_delete,
-    ic_edit,
-    ic_check,
+    ic_delete,ic_to_right,
+    ic_edit,ic_arrow_downward,ic_arrow_upward,
+    ic_check,ic_general,ic_customize,
     ic_x,
     ic_bar,
     ic_line,
@@ -64,6 +69,7 @@ export const cols = {
     warning: '#ff7171',
     alert: '#16c79a',
     advice: '#ffb037',
+    dismiss:"#ce1212",
 }
 
 export const themes = {
